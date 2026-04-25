@@ -1,0 +1,2040 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code セミナー まとめ｜AI木曜会 × Michikusa</title>
+<style>
+  /* ============================================
+     Benesse × Udemy Business トンマナ準拠
+     - 明るい・クリーン・ビジネス向け
+     - 視認性とアクション性を最優先
+     ============================================ */
+  :root {
+    --primary: #a435f0;        /* Udemy パープル (CTA/アクセント) */
+    --primary-dark: #8710d8;
+    --primary-light: #f5ecff;
+    --secondary: #ec5252;      /* Benesse 系 暖色 (強調) */
+    --accent: #1e6091;         /* 信頼感ネイビー */
+    --accent-light: #e8f1f8;
+    --gold: #f59e0b;
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --surface2: #f7f9fa;       /* Udemy 系 グレー背景 */
+    --surface3: #f1f4f6;
+    --text: #1c1d1f;           /* Udemy 系 ほぼ黒 */
+    --text-sub: #2d2f31;
+    --text-muted: #6a6f73;
+    --border: #d1d7dc;
+    --border-light: #e8eaed;
+    --success: #16a34a;
+    --warning: #f59e0b;
+    --danger: #dc2626;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+    --shadow: 0 2px 8px rgba(0,0,0,0.06);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.08);
+    --radius: 8px;
+    --radius-lg: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    background: linear-gradient(135deg, #1e3a5f 0%, #1e6091 100%);
+    padding: 64px 40px 56px;
+    text-align: left;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 85% 20%, rgba(164,53,240,0.25) 0%, transparent 55%),
+      radial-gradient(ellipse at 15% 90%, rgba(255,255,255,0.06) 0%, transparent 50%);
+  }
+  header > * { position: relative; max-width: 1100px; margin-left: auto; margin-right: auto; }
+  header h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    color: #fff;
+    line-height: 1.3;
+  }
+  header .subtitle {
+    margin-top: 14px;
+    color: rgba(255,255,255,0.85);
+    font-size: 1.05rem;
+    font-weight: 500;
+  }
+  header .meta {
+    margin-top: 24px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+  }
+  header .meta span {
+    background: rgba(255,255,255,0.14);
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.2);
+    font-weight: 500;
+    backdrop-filter: blur(4px);
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    background: #fff;
+    padding: 12px 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    border-bottom: 1px solid var(--border-light);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-sm);
+  }
+  nav a {
+    color: var(--text-sub);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+  }
+  nav a:hover {
+    color: var(--primary);
+    background: var(--primary-light);
+  }
+
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+  }
+
+  /* ===== SUMMARY BOX ===== */
+  .summary-box {
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-top: 4px solid var(--primary);
+    border-radius: var(--radius-lg);
+    padding: 36px;
+    margin-bottom: 56px;
+    box-shadow: var(--shadow);
+  }
+  .summary-box h2 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .summary-text {
+    color: var(--text-sub);
+    font-size: 1rem;
+    line-height: 1.95;
+  }
+  .summary-text strong { color: var(--primary); font-weight: 700; }
+  .summary-text em {
+    color: var(--text);
+    font-style: normal;
+    font-weight: 700;
+    background: linear-gradient(transparent 65%, #fff3a3 65%);
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .summary-card {
+    background: var(--surface2);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    padding: 20px;
+    transition: all 0.2s ease;
+    cursor: default;
+  }
+  .summary-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--primary);
+    box-shadow: var(--shadow-lg);
+    background: #fff;
+  }
+  .summary-card .icon {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .summary-card h3 {
+    font-size: 0.95rem;
+    color: var(--text);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .summary-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+  .summary-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-light);
+  }
+  .tag {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  /* ===== SECTION ===== */
+  section { margin-bottom: 64px; scroll-margin-top: 80px; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--primary);
+  }
+  .section-icon {
+    width: 56px; height: 56px;
+    border-radius: var(--radius);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem;
+    flex-shrink: 0;
+    background: var(--primary-light) !important;
+  }
+  .section-header h2 {
+    font-size: 1.65rem;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .section-number {
+    font-size: 0.72rem;
+    color: var(--primary);
+    font-weight: 700;
+    display: block;
+    letter-spacing: 0.12em;
+    margin-bottom: 2px;
+  }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    margin-bottom: 16px;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-sm);
+  }
+  .card:hover {
+    border-color: var(--border);
+    box-shadow: var(--shadow);
+  }
+  .card-label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    padding: 4px 12px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+  .label-overview { background: var(--primary-light); color: var(--primary-dark); }
+  .label-explain  { background: var(--accent-light); color: var(--accent); }
+  .label-merit    { background: #e7f7ed; color: #15803d; }
+  .label-point    { background: #fef3c7; color: #b45309; }
+  .label-check    { background: #ede9fe; color: #6d28d9; }
+  .label-memo     { background: #fee2e2; color: #b91c1c; }
+
+  .card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .card p, .card li {
+    font-size: 0.92rem;
+    color: var(--text-sub);
+    margin-bottom: 6px;
+    line-height: 1.75;
+  }
+  .card ul, .card ol { padding-left: 22px; margin-top: 8px; }
+  .card strong { color: var(--text); font-weight: 700; }
+
+  /* ===== TWO COL ===== */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* ===== CHECKLIST ===== */
+  .checklist { list-style: none; padding: 0; }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 0.92rem;
+    color: var(--text-sub);
+    border-radius: 4px;
+    transition: background 0.15s;
+  }
+  .checklist li:hover { background: var(--surface2); }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist input[type="checkbox"] {
+    accent-color: var(--primary);
+    width: 18px; height: 18px;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .checklist input[type="checkbox"]:checked + label,
+  .checklist li:has(input:checked) { color: var(--text-muted); text-decoration: line-through; }
+
+  /* ===== MEMO ===== */
+  .memo-area {
+    width: 100%;
+    min-height: 100px;
+    background: #fffef5;
+    border: 1px dashed #e5d68a;
+    border-radius: var(--radius);
+    padding: 14px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    resize: vertical;
+    transition: all 0.2s;
+  }
+  .memo-area:focus {
+    outline: none;
+    border-color: var(--primary);
+    border-style: solid;
+    background: #fff;
+    box-shadow: 0 0 0 3px var(--primary-light);
+  }
+  .memo-area::placeholder { color: #b8a960; }
+
+  /* ===== CODE ===== */
+  .code-block {
+    background: #1e1e1e;
+    border: 1px solid #2d2d2d;
+    border-radius: var(--radius);
+    padding: 16px;
+    font-family: 'SF Mono', 'Consolas', 'Menlo', monospace;
+    font-size: 0.85rem;
+    color: #d4d4d4;
+    overflow-x: auto;
+    margin: 10px 0;
+    line-height: 1.7;
+  }
+  .code-block .comment { color: #6a9955; }
+  .code-block .keyword { color: #569cd6; }
+  .code-block .string  { color: #ce9178; }
+
+  /* ===== HIGHLIGHT ===== */
+  .highlight-box {
+    border-left: 4px solid var(--primary);
+    background: var(--primary-light);
+    padding: 16px 20px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    margin: 14px 0;
+    font-size: 0.93rem;
+    color: var(--text-sub);
+    line-height: 1.75;
+  }
+  .highlight-box.warning { border-color: var(--warning); background: #fef3c7; color: #78350f; }
+  .highlight-box.success { border-color: var(--success); background: #dcfce7; color: #14532d; }
+  .highlight-box.danger  { border-color: var(--danger);  background: #fee2e2; color: #7f1d1d; }
+  .highlight-box strong { color: inherit; font-weight: 700; }
+
+  /* ===== GAP DIAGRAM ===== */
+  .gap-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 24px 0;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 24px;
+    background: var(--surface2);
+    border-radius: var(--radius-lg);
+  }
+  .gap-box {
+    padding: 18px 22px;
+    border-radius: var(--radius);
+    text-align: center;
+    min-width: 150px;
+    background: #fff;
+    box-shadow: var(--shadow-sm);
+  }
+  .gap-box.ideal   { border: 2px solid var(--success); }
+  .gap-box.current { border: 2px solid var(--secondary); }
+  .gap-box.prompt  { border: 2px solid var(--primary); background: var(--primary-light); }
+  .gap-box h4 {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .gap-box p { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+  .gap-arrow { font-size: 1.6rem; color: var(--primary); padding: 0 8px; font-weight: 700; }
+
+  /* ===== COMMAND LIST ===== */
+  .command-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+  .command-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 12px 16px;
+    background: var(--surface2);
+    border-radius: var(--radius);
+    border: 1px solid var(--border-light);
+    transition: all 0.15s;
+  }
+  .command-item:hover { background: #fff; border-color: var(--primary); }
+  .command-name {
+    font-family: 'SF Mono', 'Consolas', monospace;
+    color: var(--primary-dark);
+    background: var(--primary-light);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    min-width: 110px;
+    flex-shrink: 0;
+    text-align: center;
+  }
+  .command-desc { font-size: 0.9rem; color: var(--text-sub); line-height: 1.6; }
+
+  /* ===== MODE TABLE ===== */
+  .mode-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    background: #fff;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+  .mode-table th, .mode-table td {
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .mode-table th {
+    background: var(--surface2);
+    color: var(--text);
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.03em;
+  }
+  .mode-table td { color: var(--text-sub); }
+  .mode-table tr:hover td { background: var(--primary-light); }
+  .mode-table tr:last-child td { border-bottom: none; }
+  .mode-num {
+    display: inline-block;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    text-align: center;
+    line-height: 26px;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  /* ===== MODEL CARDS ===== */
+  .model-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-top: 14px;
+  }
+  .model-card {
+    padding: 22px 18px;
+    border-radius: var(--radius-lg);
+    background: #fff;
+    border: 1px solid var(--border-light);
+    border-top: 4px solid var(--border);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.2s;
+  }
+  .model-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+  .model-card.opus    { border-top-color: var(--gold); }
+  .model-card.sonnet  { border-top-color: var(--primary); }
+  .model-card.haiku   { border-top-color: var(--accent); }
+  .model-card h4 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  .model-card .role {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    line-height: 1.6;
+  }
+  .model-card .use {
+    font-size: 0.85rem;
+    color: var(--text-sub);
+    background: var(--surface2);
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-weight: 600;
+  }
+
+  /* ===== LECTURER SECTION ===== */
+  .lecturer-section {
+    background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+    border: 1px solid #fdba74;
+    border-left: 6px solid var(--secondary);
+    border-radius: var(--radius-lg);
+    padding: 36px;
+    margin-bottom: 56px;
+    box-shadow: var(--shadow);
+  }
+  .lecturer-section h2 {
+    color: #9a3412;
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .lecturer-section .desc {
+    color: #7c2d12;
+    font-size: 0.95rem;
+    margin-bottom: 28px;
+    line-height: 1.7;
+  }
+  .technique-card {
+    background: #fff;
+    border: 1px solid #fed7aa;
+    border-radius: var(--radius);
+    padding: 22px;
+    margin-bottom: 18px;
+    box-shadow: var(--shadow-sm);
+  }
+  .technique-card h3 {
+    color: #9a3412;
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .scene-box {
+    background: var(--surface2);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin: 10px 0;
+    font-size: 0.9rem;
+    color: var(--text-sub);
+    line-height: 1.7;
+  }
+  .scene-label {
+    font-size: 0.7rem;
+    color: var(--secondary);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+    font-weight: 800;
+  }
+  .quote-block {
+    background: var(--primary-light);
+    border-left: 4px solid var(--primary);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 14px 18px;
+    margin: 10px 0;
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--primary-dark);
+    line-height: 1.75;
+    font-weight: 500;
+  }
+
+  /* ===== REFERENCE ===== */
+  .ref-section {
+    background: var(--surface2);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    margin-top: 56px;
+  }
+  .ref-section h2 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: var(--text);
+  }
+  .ref-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+    background: #fff;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    margin-bottom: 10px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .ref-link:hover {
+    border-color: var(--primary);
+    box-shadow: var(--shadow);
+    transform: translateX(4px);
+  }
+  .ref-link .link-icon { font-size: 1.4rem; }
+  .ref-link .link-text { flex: 1; min-width: 0; }
+  .ref-link .link-title {
+    color: var(--text);
+    font-size: 0.95rem;
+    font-weight: 700;
+    display: block;
+  }
+  .ref-link .link-url {
+    color: var(--primary);
+    font-size: 0.78rem;
+    display: block;
+    word-break: break-all;
+    margin-top: 4px;
+  }
+  .ref-link::after {
+    content: '→';
+    color: var(--primary);
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  /* ===== BADGE ===== */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 0.74rem;
+    font-weight: 700;
+  }
+  .badge-blue   { background: var(--primary-light); color: var(--primary-dark); }
+  .badge-green  { background: #dcfce7; color: #15803d; }
+  .badge-orange { background: #fef3c7; color: #b45309; }
+  .badge-red    { background: #fee2e2; color: #b91c1c; }
+
+  /* ===== DIVIDER ===== */
+  .divider {
+    height: 1px;
+    background: var(--border-light);
+    margin: 36px 0;
+  }
+
+  /* ===== AGENT TREE ===== */
+  .agent-tree {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 24px 0;
+    gap: 10px;
+    padding: 24px;
+    background: var(--surface2);
+    border-radius: var(--radius-lg);
+  }
+  .agent-node {
+    background: var(--primary);
+    color: #fff;
+    padding: 12px 22px;
+    border-radius: var(--radius);
+    font-size: 0.92rem;
+    font-weight: 700;
+    box-shadow: var(--shadow);
+  }
+  .agent-children {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  .agent-child {
+    background: #fff;
+    border: 1.5px solid var(--primary);
+    padding: 10px 16px;
+    border-radius: var(--radius);
+    font-size: 0.85rem;
+    color: var(--primary-dark);
+    font-weight: 600;
+    box-shadow: var(--shadow-sm);
+  }
+  .tree-line { color: var(--primary); font-size: 1.4rem; font-weight: 700; }
+
+  footer {
+    text-align: center;
+    padding: 48px 24px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    background: var(--surface2);
+    border-top: 1px solid var(--border-light);
+  }
+  footer p:first-child {
+    color: var(--text);
+    margin-bottom: 8px;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    header { padding: 40px 20px 32px; }
+    header h1 { font-size: 1.8rem; }
+    main { padding: 32px 16px 64px; }
+    .summary-box, .lecturer-section, .ref-section { padding: 24px 20px; }
+    .section-header h2 { font-size: 1.3rem; }
+    .section-icon { width: 44px; height: 44px; font-size: 1.3rem; }
+    nav { padding: 10px 16px; gap: 4px; }
+    nav a { font-size: 0.75rem; padding: 6px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🤖 Claude Code セミナー まとめ</h1>
+  <p class="subtitle">AI木曜会 × Michikusa株式会社｜Claude Code 入門講座（Day 1）</p>
+  <div class="meta">
+    <span>📅 2026/04/25</span>
+    <span>⏱ 約3時間</span>
+    <span>👥 1万人申込</span>
+    <span>🎤 講師：臼井 匠 氏</span>
+  </div>
+</header>
+
+<nav>
+  <a href="#summary">📋 サマリー</a>
+  <a href="#prompt">①プロンプト</a>
+  <a href="#claude-basics">②基礎理解</a>
+  <a href="#pricing">③料金・モデル</a>
+  <a href="#permission">④権限・安全</a>
+  <a href="#timer">⑤タイマー</a>
+  <a href="#fileops">⑥ファイル整理</a>
+  <a href="#receipts">⑦名刺・領収書</a>
+  <a href="#mcp">⑧MCP連携</a>
+  <a href="#skills">⑨Skills</a>
+  <a href="#askuser">⑩AskUser</a>
+  <a href="#agent">⑪チームエージェント</a>
+  <a href="#desktop">⑫Desktopコマンド</a>
+  <a href="#voice">⑬音声入力</a>
+  <a href="#github">⑭GitHub</a>
+  <a href="#lecturer">🎤 講師ポイント</a>
+  <a href="#refs">🔗 参考</a>
+</nav>
+
+<main>
+
+  <!-- ========================================== -->
+  <!-- SUMMARY                                     -->
+  <!-- ========================================== -->
+  <section id="summary">
+    <div class="summary-box">
+      <h2>📋 セミナー全体サマリー</h2>
+      <p class="summary-text">
+        本セミナーは <strong>Claude Code を使った実践的なバイブコーディング</strong> をテーマに、
+        プロンプト設計の本質から始まり、ファイル操作の自動化、Skills/MCP/チームエージェントといった「次世代の働き方」までを 3時間で網羅。
+        核心メッセージは <em>「理想と現状のGAPを言語化することがプロンプト」</em>。
+        AIスタートアップのベストプラクティスとして<strong>「最初のプロンプトの解像度が重要」</strong>が強調された。
+        受講後の到達点は ①Claude Codeの使い方が明確に分かる ②次世代の働き方への解像度が上がっている、の2点。
+      </p>
+
+      <div class="summary-grid">
+        <div class="summary-card">
+          <div class="icon">🎯</div>
+          <h3>核心コンセプト</h3>
+          <p>理想 ⇄ 現状のGAP = プロンプト</p>
+        </div>
+        <div class="summary-card">
+          <div class="icon">📂</div>
+          <h3>ローカル直接操作</h3>
+          <p>PC内のファイルを読み書き・整理・自動化</p>
+        </div>
+        <div class="summary-card">
+          <div class="icon">⚡</div>
+          <h3>Skills</h3>
+          <p>一連の作業を/コマンドで再利用</p>
+        </div>
+        <div class="summary-card">
+          <div class="icon">🔌</div>
+          <h3>MCP連携</h3>
+          <p>Google/Slack/Notionと外部接続</p>
+        </div>
+        <div class="summary-card">
+          <div class="icon">👥</div>
+          <h3>チームエージェント</h3>
+          <p>AIが組織化、並列で複数AIが動く</p>
+        </div>
+        <div class="summary-card">
+          <div class="icon">❓</div>
+          <h3>AskUserQuestion</h3>
+          <p>要件をAIに聞かせて出戻り回避</p>
+        </div>
+        <div class="summary-card">
+          <div class="icon">🎙️</div>
+          <h3>音声入力</h3>
+          <p>Aqua Voice推奨（安定性◎）</p>
+        </div>
+        <div class="summary-card">
+          <div class="icon">🐙</div>
+          <h3>GitHub安全活用</h3>
+          <p>Star1000以上を目安に取り込み</p>
+        </div>
+      </div>
+
+      <div class="summary-tags">
+        <span class="tag">Claude Code</span>
+        <span class="tag">バイブコーディング</span>
+        <span class="tag">プロンプト設計</span>
+        <span class="tag">Skills</span>
+        <span class="tag">MCP</span>
+        <span class="tag">チームエージェント</span>
+        <span class="tag">音声入力</span>
+        <span class="tag">ファイル操作</span>
+        <span class="tag">Desktop版</span>
+        <span class="tag">GitHub</span>
+        <span class="tag">AskUserQuestion</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- ① PROMPT                                    -->
+  <!-- ========================================== -->
+  <section id="prompt">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(67,198,172,0.2);">✍️</div>
+      <div>
+        <span class="section-number">CATEGORY 01</span>
+        <h2>プロンプト設計の本質</h2>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <span class="card-label label-overview">概要</span>
+        <p>Claude Codeへの指示（プロンプト）は、<strong>「理想の状態」と「現状」のGAPを言語化したもの</strong>に他ならない。このフレームを覚えれば誰でもプロンプトを書ける。</p>
+      </div>
+      <div class="card">
+        <span class="card-label label-explain">説明</span>
+        <p>プロンプト集やテクニック本に振り回される必要なし。「あなたは最高の○○です」式のロール指定もほぼ不要。やりたいこと（理想）と今の状態（現状）の差分を埋める文を書くだけ。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="gap-diagram">
+        <div class="gap-box ideal">
+          <h4>理想の状態</h4>
+          <p>✅ こうなってほしい</p>
+        </div>
+        <div class="gap-arrow">→</div>
+        <div class="gap-box prompt">
+          <h4>GAP = プロンプト</h4>
+          <p>📝 この差を言語化</p>
+        </div>
+        <div class="gap-arrow">←</div>
+        <div class="gap-box current">
+          <h4>現状</h4>
+          <p>⚠️ 今こうなっている</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <span class="card-label label-merit">メリット</span>
+        <ul>
+          <li>プロンプト集を覚えなくていい</li>
+          <li>AIが何をすべきか明確になる</li>
+          <li>最初の解像度が高いほど完成品の質が上がる</li>
+          <li>修正ループ（出戻り）が減る</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="card-label label-point">ポイント・観点</span>
+        <ul>
+          <li><strong>理想を先に言語化</strong>する</li>
+          <li>分からない時は <strong>AskUserQuestion</strong> でAIに聞かせる（→ ⑩）</li>
+          <li>アウトプット形式（HTML/CSV/ファイル名）を必ず指定</li>
+          <li>「あなたは最高の○○です」は今は不要</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-point">具体的な指示文（ひいおばあちゃんの教え）</span>
+      <div class="quote-block">
+        「タイトなリソースで<br>
+        クイックなローンチを目指すため<br>
+        バイブコーディングする<br>
+        AIスタートアップでのベストプラクティスは<br>
+        最初のプロンプトの時点での<br>
+        スペックの解像度が重要よ...」
+      </div>
+      <p style="font-size:0.85rem; margin-top:8px;">→ Claude Codeは1時間以上稼働することがある。「やり直し」のコストが従来比で激増。だから<strong>最初の解像度</strong>が決定的に重要。</p>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-check">やってみよう！チェックリスト</span>
+      <ul class="checklist">
+        <li><input type="checkbox"> 今日やりたいことの「理想の状態」を一文で書く</li>
+        <li><input type="checkbox"> 「現状」（今どうなっているか）を一文で書く</li>
+        <li><input type="checkbox"> その差分（GAP）をプロンプトとして入力する</li>
+        <li><input type="checkbox"> アウトプット形式（ファイル形式・命名規則）を指示に追加</li>
+        <li><input type="checkbox"> 出来た結果を見て、解像度の不足箇所を振り返る</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-memo">アウトプットメモ欄</span>
+      <textarea class="memo-area" placeholder="理想：&#10;現状：&#10;GAP（プロンプト案）："></textarea>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- ② CLAUDE BASICS                            -->
+  <!-- ========================================== -->
+  <section id="claude-basics">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(108,99,255,0.2);">🤖</div>
+      <div>
+        <span class="section-number">CATEGORY 02</span>
+        <h2>Claude Code の基礎理解</h2>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <span class="card-label label-overview">概要</span>
+        <p>Claude Codeは<strong>PC内部に入り込んで直接ファイルを読み書き・実行する</strong>AI。ChatGPTのような「クラウド上で文章を返すだけ」ではない。</p>
+      </div>
+      <div class="card">
+        <span class="card-label label-explain">説明（4種類の使い方）</span>
+        <ul>
+          <li><strong>CLI版（ターミナル）</strong>：旧来のスタイル、上級者向け</li>
+          <li><strong>Desktop版</strong>：今日のおすすめ、GUIで使いやすい</li>
+          <li><strong>Web版</strong>：ほぼ使わない</li>
+          <li><strong>IDE拡張</strong>：エディタ統合</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-point">他AIとの決定的な違い</span>
+      <table class="mode-table">
+        <thead>
+          <tr><th></th><th>ChatGPT / Gemini</th><th>Claude Code</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>動く場所</td><td>クラウド</td><td><strong style="color:var(--accent)">あなたのPC内部</strong></td></tr>
+          <tr><td>ファイル操作</td><td>テキスト返答のみ</td><td><strong style="color:var(--accent)">読む/書く/消す</strong>が直接可能</td></tr>
+          <tr><td>稼働時間</td><td>都度応答</td><td><strong style="color:var(--accent)">長時間（1時間以上）</strong>連続作業</td></tr>
+          <tr><td>規模</td><td>1ファイル単位</td><td><strong style="color:var(--accent)">大量ファイル</strong>を一括処理</td></tr>
+        </tbody>
+      </table>
+      <div class="highlight-box success" style="margin-top:12px;">
+        <strong>📰 業界トピック</strong><br>
+        2026/4/25朝、Google → Anthropicへ300億ドル（約6.4兆円）の出資が報道。AI業界最大規模。
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-point">Desktop版でOK（ターミナル不要）</span>
+      <p>「Desktop版使ってんの？」と冷笑する人がいるかもしれないが、安心してDesktop版で問題ない。アップデートで機能差はほぼ解消。</p>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-check">やってみよう！チェックリスト</span>
+      <ul class="checklist">
+        <li><input type="checkbox"> Claude Code Desktop をインストール</li>
+        <li><input type="checkbox"> 「ローカル」を選択して動作させるフォルダを指定</li>
+        <li><input type="checkbox"> 「クロード」「コワーク」「クロードコード」の3タブのうち一番右を選ぶ</li>
+        <li><input type="checkbox"> Windowsの方は事前に Git をインストール</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-memo">アウトプットメモ欄</span>
+      <textarea class="memo-area" placeholder="自分のClaude Code環境メモ（OS / 動作フォルダ / 課金プラン など）："></textarea>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- ③ PRICING & MODELS                          -->
+  <!-- ========================================== -->
+  <section id="pricing">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(240,165,0,0.2);">💰</div>
+      <div>
+        <span class="section-number">CATEGORY 03</span>
+        <h2>料金プラン & モデル選択</h2>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <span class="card-label label-overview">概要</span>
+        <p><strong>無課金では使えない</strong>。Pro / Max / Max200 の3プラン。本セミナーを完走するには <strong>Maxプラン推奨</strong>。</p>
+      </div>
+      <div class="card">
+        <span class="card-label label-explain">説明</span>
+        <ul>
+          <li><strong>Pro</strong>：制限がすぐに来る可能性。録画で後追いも可</li>
+          <li><strong>Max（約15,000円）</strong>：本セミナー推奨</li>
+          <li><strong>Max 200（約30,000円）</strong>：研修講師・本気開発者向け</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-point">3つのモデル</span>
+      <div class="model-cards">
+        <div class="model-card opus">
+          <h4>🏆 Opus 4.7</h4>
+          <p class="role">最も賢い・最も高い</p>
+          <p class="use">ここぞの大事なバグ修正・複雑開発</p>
+        </div>
+        <div class="model-card sonnet">
+          <h4>⚖ Sonnet 4.6</h4>
+          <p class="role">バランス型</p>
+          <p class="use"><strong>講師おすすめの常用モデル</strong></p>
+        </div>
+        <div class="model-card haiku">
+          <h4>⚡ Haiku 4.5</h4>
+          <p class="role">速い・安い</p>
+          <p class="use">超簡単なファイル探索など</p>
+        </div>
+      </div>
+      <div class="highlight-box warning" style="margin-top:14px;">
+        <strong>⚠ 使用量モニタリング</strong><br>
+        右下のインジケーターで「5時間制限 / 週次 / 前日 / モデル別」を確認できる。Opusばかり使うとProプランは即枯渇。
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-point">考え方の選択肢</span>
+      <ul>
+        <li><strong>節約派</strong>：Sonnet常用 → 詰まったらOpusへ昇格</li>
+        <li><strong>効率派</strong>：最初からOpus（Anthropic創業者の考え方。出戻り損失を避ける）</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-check">やってみよう！チェックリスト</span>
+      <ul class="checklist">
+        <li><input type="checkbox"> 自分のプラン（Pro / Max / Max200）を決める</li>
+        <li><input type="checkbox"> 右下から「使用量」を毎回確認するクセをつける</li>
+        <li><input type="checkbox"> 簡単な作業はSonnet、重いバグ修正はOpusで試す</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-memo">アウトプットメモ欄</span>
+      <textarea class="memo-area" placeholder="自分の使い分けルール（例：日常はSonnet 4.6、新規開発はOpus 4.7、整理系はHaiku）："></textarea>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- ④ PERMISSION & SAFETY                       -->
+  <!-- ========================================== -->
+  <section id="permission">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(255,85,119,0.2);">🔐</div>
+      <div>
+        <span class="section-number">CATEGORY 04</span>
+        <h2>権限・ファイルアクセスと安全性</h2>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-overview">概要</span>
+      <p>Claude Codeは<strong>PCの階層構造（ディレクトリ）の中で動く</strong>。動かす場所を決めずに広い権限を与えると、データを全消去するリスクすらある。</p>
+      <div class="highlight-box danger" style="margin-top:8px;">
+        <strong>🚨 鉄則：ルートディレクトリには権限を与えない</strong><br>
+        必ず「中身のないテスト用フォルダ」から始める。データのある場所は権限を渡さない。
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-explain">5つの権限モード</span>
+      <table class="mode-table">
+        <thead>
+          <tr><th>#</th><th>モード</th><th>挙動</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="mode-num">1</span></td><td>許可を確認</td><td>毎回確認。安全だがめんどう</td></tr>
+          <tr><td><span class="mode-num">2</span></td><td>編集を承認</td><td>編集時のみ確認</td></tr>
+          <tr><td><span class="mode-num">3</span></td><td><strong>プランモード</strong></td><td>実行せず計画だけ提示</td></tr>
+          <tr><td><span class="mode-num">4</span></td><td><strong>自動モード</strong></td><td>限りなく自律的（おすすめ）</td></tr>
+          <tr><td><span class="mode-num">5</span></td><td>許可をバイパス</td><td>全自動、危険、初心者NG</td></tr>
+        </tbody>
+      </table>
+      <div class="highlight-box" style="margin-top:12px;">
+        <strong>講師の使い分け</strong><br>
+        大規模 → <strong>プランモードでまず計画確認 → 自動モードで実行</strong><br>
+        さくっと → 自動モード
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-point">設定方法（バイパス／自動を有効化）</span>
+      <p>左下 → 設定 → Claude Code → 「バイパス権限モードを許可」「自動権限モードを許可」をON。これを最初に有効化しないと選択肢に出ない。</p>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-check">やってみよう！チェックリスト</span>
+      <ul class="checklist">
+        <li><input type="checkbox"> デスクトップに新しい空フォルダを作って動作場所に指定</li>
+        <li><input type="checkbox"> 5つの権限モードを左下から確認</li>
+        <li><input type="checkbox"> プランモードを試してClaudeに計画を出させる</li>
+        <li><input type="checkbox"> バイパスモードは初心者のうちは絶対に使わない</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-memo">アウトプットメモ欄</span>
+      <textarea class="memo-area" placeholder="自分のデフォルト権限モード・運用ルール："></textarea>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- ⑤ TIMER APP                                 -->
+  <!-- ========================================== -->
+  <section id="timer">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(67,198,172,0.2);">⏰</div>
+      <div>
+        <span class="section-number">CATEGORY 05</span>
+        <h2>実践①：タイマーアプリを作る（最初の一歩）</h2>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <span class="card-label label-overview">概要</span>
+        <p>Claude Codeで「最初の一歩」を体験する。ChatGPTで言うところの「これを英語にしてください」レベルの最小タスク。</p>
+      </div>
+      <div class="card">
+        <span class="card-label label-merit">メリット</span>
+        <ul>
+          <li>PC内に直接ファイルが生成される体験ができる</li>
+          <li>コピペ→保存→ブラウザで開く、の手作業がゼロ</li>
+          <li>権限ダイアログの流れが分かる</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-point">具体的な指示文</span>
+      <div class="code-block">
+        <span class="keyword">簡単なタイマーを作ってください</span>
+      </div>
+      <p style="font-size:0.85rem; margin-top:8px;">これだけでHTMLがデスクトップに直置きされる。URLは <code>http://...</code> ではなくローカルパスになる点に注目。<strong>このURLは他人に共有できない</strong>。</p>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-check">やってみよう！チェックリスト</span>
+      <ul class="checklist">
+        <li><input type="checkbox"> Claude Codeを開いて新規セッション</li>
+        <li><input type="checkbox"> 「簡単なタイマーを作ってください」と入力</li>
+        <li><input type="checkbox"> 出来上がったHTMLをデスクトップで確認</li>
+        <li><input type="checkbox"> ブラウザで開いてローカル動作することを体感</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-memo">アウトプットメモ欄</span>
+      <textarea class="memo-area" placeholder="作ってみた感想・つまずきポイント："></textarea>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- ⑥ FILE OPS                                  -->
+  <!-- ========================================== -->
+  <section id="fileops">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(108,99,255,0.2);">📁</div>
+      <div>
+        <span class="section-number">CATEGORY 06</span>
+        <h2>実践②：ファイル整理（散らかす→片付ける）</h2>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <span class="card-label label-overview">概要</span>
+        <p>指定フォルダの中で、ファイルの<strong>作成・整理・分類</strong>がClaudeに任せられる。あえて散らかしてから整理させる体験。</p>
+      </div>
+      <div class="card">
+        <span class="card-label label-merit">メリット</span>
+        <ul>
+          <li>JSON/PNG/Python等あらゆる形式を扱える</li>
+          <li>フォルダ構造を意味的に整理できる</li>
+          <li>大量ファイルを一括で扱う感覚を得られる</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-point">具体的な指示文（2段階）</span>
+      <div class="code-block">
+        <span class="comment"># Step 1: あえて散らかす</span><br>
+        <span class="keyword">デスクトップに適当な大量のファイルを配置して、とにかく散らかしまくってください。</span><br>
+        <span class="keyword">30個ぐらいのいろんなファイルがあるといいですね。</span><br><br>
+        <span class="comment"># Step 2: 整理させる</span><br>
+        <span class="keyword">ここで今散らかしたファイルをとにかく綺麗に整理整頓してください。</span>
+      </div>
+      <p style="font-size:0.85rem; margin-top:8px;">→ プライベートメモ／開発／仕事／ダウンロード のような<strong>意味的なフォルダ分類</strong>が自動で行われる。</p>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-check">やってみよう！チェックリスト</span>
+      <ul class="checklist">
+        <li><input type="checkbox"> テスト用フォルダで散らかし→整理を実行</li>
+        <li><input type="checkbox"> 「許可を確認」モードと「バイパス」モードでの違いを比較</li>
+        <li><input type="checkbox"> どんな分類カテゴリができたか観察</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-memo">アウトプットメモ欄</span>
+      <textarea class="memo-area" placeholder="自分が整理させたい現実のフォルダ・案件メモ："></textarea>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- ⑦ RECEIPTS / CARDS                          -->
+  <!-- ========================================== -->
+  <section id="receipts">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(240,165,0,0.2);">🧾</div>
+      <div>
+        <span class="section-number">CATEGORY 07</span>
+        <h2>実践③：名刺・領収書の自動整理（OCR×Excel×リネーム）</h2>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <span class="card-label label-overview">概要</span>
+        <p>Claudeはローカルファイルの<strong>中身まで読み込める</strong>（画像認識OCR含む）。20枚の名刺画像をスキャンしてExcel化、領収書をyyyymmdd形式でリネーム可能。</p>
+      </div>
+      <div class="card">
+        <span class="card-label label-merit">メリット</span>
+        <ul>
+          <li>展示会後の名刺整理が一瞬で完了</li>
+          <li>確定申告・経費精算の前処理が自動化</li>
+          <li>命名規則の統一でファイル検索性が爆上がり</li>
+          <li>税理士へのデータ受け渡しが楽になる</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-point">具体的な指示文（領収書一括リネーム）</span>
+      <div class="code-block">
+        <span class="comment"># 入力データ</span><br>
+        <span class="string">Excelファイル</span><br>
+        /Users/takumiusui/Desktop/領収書一覧.xlsx<br><br>
+        <span class="comment"># 処理対象</span><br>
+        /Users/takumiusui/Desktop/claude-code-couls-2026-04/receipts/<br><br>
+        <span class="comment"># 命名規則</span><br>
+        <span class="keyword">ファイルリネーム（20枚すべて yyyymmdd_宛名_但し書き.jpg 形式に変換）</span><br><br>
+        <span class="comment"># Excel列定義</span><br>
+        No. / 日付 / 宛名 / 金額(円) / 但し書き / 発行者 / ファイル名
+      </div>
+      <div class="highlight-box success" style="margin-top:10px;">
+        <strong>命名規則のコツ</strong>：<code>yyyymmdd</code> 形式は世界共通で並び替えに強い。日本人にも見やすい鉄板フォーマット。
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-point">プロンプトに含めるべき要素</span>
+      <ol>
+        <li>データファイルのパス（Excel/CSV）</li>
+        <li>対象ファイルが入っているフォルダパス</li>
+        <li>命名規則（フォーマット）</li>
+        <li>Excelの列名と各列の意味</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-point">便利ショートカット（Mac）</span>
+      <div class="command-list">
+        <div class="command-item">
+          <span class="command-name">⌘+Shift+G</span>
+          <span class="command-desc">Finderでファイルパス指定ジャンプ。Claudeが出すパスをコピペで一瞬で開ける</span>
+        </div>
+        <div class="command-item">
+          <span class="command-name">Option+右ク</span>
+          <span class="command-desc">「パス名をコピー」が出現。Claudeへの場所指定が楽に</span>
+        </div>
+        <div class="command-item">
+          <span class="command-name">Win+R</span>
+          <span class="command-desc">Windowsのファイル名指定実行（同等機能）</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-check">やってみよう！チェックリスト</span>
+      <ul class="checklist">
+        <li><input type="checkbox"> セミナー資料GitHubから cards / receipts をダウンロード</li>
+        <li><input type="checkbox"> 名刺フォルダをスキャンしてExcel化を依頼</li>
+        <li><input type="checkbox"> 領収書をyyyymmdd形式で一括リネーム</li>
+        <li><input type="checkbox"> 自分の実データ（経費・名刺）で再現してみる</li>
+      </ul>
+      <div class="highlight-box success" style="margin-top:14px;">
+        <strong>📥 サンプルデータDL先（直リンク）</strong><br>
+        ・名刺サンプル: <a href="https://github.com/takpfive/claude-code-course-materials-2026-04/tree/main/cards" target="_blank" style="color:var(--primary);">cards/</a><br>
+        ・領収書サンプル: <a href="https://github.com/takpfive/claude-code-course-materials-2026-04/tree/main/receipts" target="_blank" style="color:var(--primary);">receipts/</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-memo">アウトプットメモ欄</span>
+      <textarea class="memo-area" placeholder="自分が自動化したい現実の業務（請求書/契約書/写真など）："></textarea>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- ⑧ MCP                                       -->
+  <!-- ========================================== -->
+  <section id="mcp">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(67,198,172,0.2);">🔌</div>
+      <div>
+        <span class="section-number">CATEGORY 08</span>
+        <h2>MCP（外部サービス連携）</h2>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <span class="card-label label-overview">概要</span>
+        <p><strong>MCP（Multi Context Protocol）</strong> はClaudeを外部サービス（Google Calendar, Gmail, Slack, Notion等）と接続する規格。AIをポケモンのように<strong>育てて技を増やす</strong>イメージ。</p>
+      </div>
+      <div class="card">
+        <span class="card-label label-explain">説明</span>
+        <p>MCPもAPIコネクターも、ニュアンスは<strong>「外部サービス接続用の道具」</strong>と捉えればOK。料理で言うと<strong>調味料</strong>（オイスターソースを買い足すと料理の幅が広がる）。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-merit">メリット</span>
+      <ul>
+        <li>カレンダーから空き時間を抽出してメール下書きまで自動化</li>
+        <li>名刺Excel × Gmail MCP で営業メールの下書きを20件一気に生成</li>
+        <li>自社業務システムとの連携で日常業務を自動化</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-point">設定手順</span>
+      <ol>
+        <li>左下 → 設定 → コネクター</li>
+        <li>Google Calendar / Gmail / Slack / Notion などから接続</li>
+        <li>OAuthでログイン → 許可</li>
+        <li>チャットから自然言語で利用開始</li>
+      </ol>
+      <div class="highlight-box warning" style="margin-top:12px;">
+        <strong>⚠ 安全運用</strong><br>
+        メール送信MCPは<strong>「下書きまで」に止める</strong>。最終送信は人間がやる。情報漏洩リスクのある業務は基本やらない。
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-point">指示文の例</span>
+      <div class="code-block">
+        <span class="keyword">Googleカレンダーと連携して1週間分の予定を教えてください。</span><br>
+        <span class="keyword">および1時間のZoom会議ができる空き時間を教えてください。</span>
+      </div>
+      <div class="code-block" style="margin-top:8px;">
+        <span class="comment"># フル統合の例（今日やったこと全部のせ）</span><br>
+        <span class="keyword">名刺Excelをもとに、Gmail MCPを使って全員分のメールを作りたい。</span><br>
+        <span class="keyword">それぞれの会社名や役職から事業内容を予想して、</span><br>
+        <span class="keyword">道草株式会社のAI研修を販売する文言を書いて、</span><br>
+        <span class="keyword">20件分の下書きをGmailに入れておいてください。</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-check">やってみよう！チェックリスト</span>
+      <ul class="checklist">
+        <li><input type="checkbox"> 設定 → コネクター から Google Calendar を接続</li>
+        <li><input type="checkbox"> 「今週の予定を教えて」と聞いてみる</li>
+        <li><input type="checkbox"> Gmail MCPで「下書き」生成を試す（送信はしない）</li>
+        <li><input type="checkbox"> 自分が連携したい外部サービスをリスト化</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-memo">アウトプットメモ欄</span>
+      <textarea class="memo-area" placeholder="連携したMCP・実現したい業務メモ："></textarea>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- ⑨ SKILLS                                    -->
+  <!-- ========================================== -->
+  <section id="skills">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(255,101,132,0.2);">⚡</div>
+      <div>
+        <span class="section-number">CATEGORY 09</span>
+        <h2>Skills & スラッシュコマンド</h2>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <span class="card-label label-overview">概要</span>
+        <p>一度設定した一連の作業を、<strong>/コマンドで何度も呼び出せる手順書</strong>。GPTsの強化版。料理で言うと<strong>レシピ</strong>。</p>
+      </div>
+      <div class="card">
+        <span class="card-label label-explain">MCPとの違い</span>
+        <ul>
+          <li><strong>MCP = 道具・調味料</strong>（できることを増やす）</li>
+          <li><strong>Skills = 手順書・レシピ</strong>（決めた流れを再現）</li>
+          <li>Skillsは簡単に共有可能（GitHubで配布できる）</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-merit">メリット</span>
+      <ul>
+        <li>同じプロンプトを毎回書かずに済む</li>
+        <li>チームで運用ノウハウを共有できる</li>
+        <li>100枚以上のスライドも一発生成（pptx_michikusastyle）</li>
+        <li>スキマ業務を自動化してチームに配れる</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-point">具体的な指示文（セミナー実例）</span>
+      <div class="code-block">
+        <span class="comment"># GitHub URL を貼って</span><br>
+        <span class="string">https://github.com/takpfive/claude-code-course-materials-2026-04/tree/main</span><br><br>
+        <span class="keyword">これをDLして、Skillsが保存されているから、</span><br>
+        <span class="keyword">Skillsとして使えるようにして欲しい。</span><br>
+        <span class="keyword">それを、pptx_michikusastyleで/コマンド呼び出しできるようにして欲しい。</span>
+      </div>
+      <p style="font-size:0.85rem; margin-top:8px;">使うときは <code>/pptx_michikusastyle</code> と入力するだけ。</p>
+      <div class="highlight-box success" style="margin-top:14px;">
+        <strong>📥 Skill 直リンク (DLしてClaude Codeに渡す)</strong><br>
+        <a href="https://github.com/takpfive/claude-code-course-materials-2026-04/tree/main/Skills/pptx_michikusa" target="_blank" style="color:var(--primary);">
+          Skills/pptx_michikusa/
+        </a><br>
+        <span style="font-size:0.82rem; color:var(--text-muted);">中身: SKILL.md / michikusa.pptx / michikusa.potx / michikusa_intro.pptx / michikusa_pptx.py</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-point">講師のスライド作成ワークフロー</span>
+      <ol>
+        <li>Notionに音声でブレストを大量入力</li>
+        <li>Notion AIで構成を整える</li>
+        <li>Claude Codeに <code>/pptx_michikusastyle</code> で渡す</li>
+        <li>100枚規模のスライドが一発で生成</li>
+        <li>細部（文字サイズ等）だけ追加指示で修正</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-check">やってみよう！チェックリスト</span>
+      <ul class="checklist">
+        <li><input type="checkbox"> GitHub からセミナー資料リポジトリをDL</li>
+        <li><input type="checkbox"> 「Skillsとして使えるようにして」と指示</li>
+        <li><input type="checkbox"> /pptx_michikusastyle を呼び出して動作確認</li>
+        <li><input type="checkbox"> よく使う自分のプロンプトをSkills化</li>
+        <li><input type="checkbox"> /スラッシュ で過去のSkills一覧を確認</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-memo">アウトプットメモ欄</span>
+      <textarea class="memo-area" placeholder="登録したいSkills候補（コマンド名・用途）：&#10;例）/jet-cut → 動画ジェットカット自動編集"></textarea>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- ⑩ ASK USER QUESTION                         -->
+  <!-- ========================================== -->
+  <section id="askuser">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(67,198,172,0.2);">❓</div>
+      <div>
+        <span class="section-number">CATEGORY 10</span>
+        <h2>AskUserQuestionツール（要件定義をAIに聞かせる）</h2>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <span class="card-label label-overview">概要</span>
+        <p>「タスク管理システムを作って」と言われても、<strong>そもそも理想像が分からない</strong>のが普通。AskUserQuestionツールは<strong>Claudeから質問させて要件を引き出す</strong>機能。</p>
+      </div>
+      <div class="card">
+        <span class="card-label label-explain">なぜ必要か</span>
+        <p>Claudeは1回の指示で1時間以上稼働しうる。最初の解像度が低いと<strong>大規模な出戻り</strong>が発生する。質問を通じて理想を言語化させることで損失を回避。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-point">具体的な指示文（魔法のフレーズ）</span>
+      <div class="code-block">
+        <span class="keyword">タスク管理システムを作りたい。</span><br>
+        <span class="keyword">AskUserQuestionToolsを使って、まずは質問してくれ</span>
+      </div>
+      <p style="font-size:0.85rem; margin-top:8px;">→ Claudeが「Webアプリ？ネイティブ？」「ログイン機能必要？」「カテゴリ管理は？」「リマインダー要る？」など段階的に聞いてくれる。</p>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-point">代替案（節約派向け）</span>
+      <p>Claudeのトークンを節約したいなら、<strong>ChatGPTやGeminiで先に要件定義の壁打ち</strong>を済ませてから、固まった要件をClaude Codeに渡す。</p>
+      <div class="code-block" style="margin-top:8px;">
+        <span class="keyword">タスク管理システムを作りたいんだけど、要件定義のために</span><br>
+        <span class="keyword">どんな場面で使うか、機能は何が必要か質問してくれない？</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-check">やってみよう！チェックリスト</span>
+      <ul class="checklist">
+        <li><input type="checkbox"> 「○○を作りたい。AskUserQuestionToolsを使って質問してくれ」と入力</li>
+        <li><input type="checkbox"> Claudeの質問に1問ずつ答える</li>
+        <li><input type="checkbox"> 出来上がりが指示なしの場合とどう違うか比較</li>
+        <li><input type="checkbox"> ChatGPT/Geminiでの要件壁打ちも試す</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-memo">アウトプットメモ欄</span>
+      <textarea class="memo-area" placeholder="作りたいシステム・ツールのアイデア："></textarea>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- ⑪ TEAM AGENT                                -->
+  <!-- ========================================== -->
+  <section id="agent">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(108,99,255,0.25);">👥</div>
+      <div>
+        <span class="section-number">CATEGORY 11</span>
+        <h2>チームエージェント（AIが組織化する未来）</h2>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <span class="card-label label-overview">概要</span>
+        <p>1つの指示から、Claudeが<strong>複数のサブエージェントを並列起動</strong>して連携する仕組み。<strong>未来の働き方そのもの</strong>。</p>
+      </div>
+      <div class="card">
+        <span class="card-label label-explain">構造イメージ</span>
+        <p>社長（あなた）→ 部長（Claude Code）→ 各担当（A/B/C/D...）が並列で動く組織モデル。サブエージェント同士で会話・連携も可能。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="agent-tree">
+        <div class="agent-node">👤 ユーザー</div>
+        <div class="tree-line">↓</div>
+        <div class="agent-node">🤖 Claude Code（指揮）</div>
+        <div class="tree-line">↓</div>
+        <div class="agent-children">
+          <div class="agent-child">🐦 SNS調査</div>
+          <div class="agent-child">🌐 Web調査</div>
+          <div class="agent-child">▶️ YouTube調査</div>
+          <div class="agent-child">📚 Wikipedia調査</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-merit">メリット・応用イメージ</span>
+      <ul>
+        <li>30〜40個のエージェントを組み合わせて<strong>「組織」を作れる</strong></li>
+        <li>毎日の定期タスクで自動運用（教育者・調査・スライド生成・動画化・メルマガ・エゴサ・マーケター）</li>
+        <li>連携の会話をSlackクローンに流すと<strong>AIが社内Slackで会話する</strong>状態を可視化できる</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-point">具体的な指示文</span>
+      <div class="code-block">
+        <span class="keyword">臼井匠についてリサーチしてください。</span><br>
+        <span class="keyword">その際、チームエージェントを組んで、</span><br>
+        <span class="keyword">SNSからの調査、Web記事からの調査、</span><br>
+        <span class="keyword">YouTubeからの調査、Wikipediaからの調査のように、</span><br>
+        <span class="keyword">4つの並列エージェントを組んで実施してください。</span>
+      </div>
+      <div class="highlight-box warning" style="margin-top:12px;">
+        <strong>⚠ コンテキスト消費に注意</strong><br>
+        並列エージェントはトークン消費が大きい。Haiku 4.5で工数低めに設定するのも有効。
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-point">人間の役割が変わる</span>
+      <ul>
+        <li>「AIを使いこなす」から「<strong>AI組織を前提にビジネスを設計する</strong>」へ</li>
+        <li>人間は許可・支払い・方針決定・倫理判断が中心に</li>
+        <li>AIネイティブな組織のあり方を体感できる唯一のツール</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-check">やってみよう！チェックリスト</span>
+      <ul class="checklist">
+        <li><input type="checkbox"> 4並列のリサーチタスクを実行してみる</li>
+        <li><input type="checkbox"> エージェント同士の連携ログを観察</li>
+        <li><input type="checkbox"> 自分の事業で「AI組織化」できるタスクを書き出す</li>
+        <li><input type="checkbox"> Slack/Notion連携で会話を可視化する応用を構想</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-memo">アウトプットメモ欄</span>
+      <textarea class="memo-area" placeholder="自分の事業で組みたいAI組織の構成（役割×N）："></textarea>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- ⑫ DESKTOP COMMANDS                          -->
+  <!-- ========================================== -->
+  <section id="desktop">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(108,99,255,0.2);">💻</div>
+      <div>
+        <span class="section-number">CATEGORY 12</span>
+        <h2>Desktop版おすすめコマンド</h2>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-overview">概要 & メリット</span>
+      <p>Desktop版には<strong>セッション管理・コンテキスト確認</strong>用のスラッシュコマンドが用意されている。これだけで日常運用が劇的に楽になる。</p>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-point">3つのコマンド</span>
+      <div class="command-list">
+        <div class="command-item">
+          <span class="command-name">/resume</span>
+          <span class="command-desc">セッションを再開。左サイドバーから過去セッション一覧を見て続きから作業</span>
+        </div>
+        <div class="command-item">
+          <span class="command-name">/context</span>
+          <span class="command-desc">作業量（コンテキスト使用量）を確認。<strong>右下に常時表示</strong>されている</span>
+        </div>
+        <div class="command-item">
+          <span class="command-name">/clear</span>
+          <span class="command-desc">新しく始めたい時。または「New Session」ボタンで開始</span>
+        </div>
+      </div>
+      <div class="highlight-box" style="margin-top:12px;">
+        <strong>コンテキストの上限</strong>：200K規模。これを超えるとAIが過去の指示を忘れる。長時間作業ではこまめにチェック。
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-check">やってみよう！チェックリスト</span>
+      <ul class="checklist">
+        <li><input type="checkbox"> /resume で過去セッション一覧を表示</li>
+        <li><input type="checkbox"> /context でコンテキスト使用量を確認</li>
+        <li><input type="checkbox"> 右下のインジケーターを常に意識</li>
+        <li><input type="checkbox"> /clear で新規セッションを切る癖をつける</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-memo">アウトプットメモ欄</span>
+      <textarea class="memo-area" placeholder="自分のセッション運用ルール："></textarea>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- ⑬ VOICE                                     -->
+  <!-- ========================================== -->
+  <section id="voice">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(255,101,132,0.2);">🎙️</div>
+      <div>
+        <span class="section-number">CATEGORY 13</span>
+        <h2>音声入力</h2>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <span class="card-label label-overview">概要</span>
+        <p>長文プロンプトはタイピングより音声入力が圧倒的に速い（タイピング全国12位の講師でも音声の方が速い）。<strong>機械に話しかける</strong>感覚に慣れることが重要。</p>
+      </div>
+      <div class="card">
+        <span class="card-label label-merit">メリット</span>
+        <ul>
+          <li>タイピング速度の上限を超える</li>
+          <li>思考をそのまま言語化できる</li>
+          <li>長い理想像の言語化が苦にならない</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-point">おすすめソフト</span>
+      <table class="mode-table">
+        <thead>
+          <tr><th>ソフト</th><th>評価</th><th>備考</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Aqua Voice</strong></td><td><span class="badge badge-green">推奨</span></td><td>安定性で一番おすすめ</td></tr>
+          <tr><td>OS標準</td><td><span class="badge badge-blue">手軽</span></td><td>Win+H / Mac Fn×2</td></tr>
+          <tr><td>Typeless</td><td><span class="badge badge-blue">候補</span></td><td>差分は大きくない</td></tr>
+          <tr><td>Voice OS</td><td><span class="badge badge-blue">候補</span></td><td>差分は大きくない</td></tr>
+        </tbody>
+      </table>
+      <div class="highlight-box success" style="margin-top:10px;">
+        甲乙つけ難いが、<strong>安定性でAqua Voiceが最推し</strong>。まずOS標準で試して、物足りなければAqua Voiceへ。
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-point">ガジェット</span>
+      <p>パソコン内蔵マイクは音質が落ちる。外付けマイクが1個あると入力精度が向上。本気でやるならShure等の高音質マイク。</p>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-check">やってみよう！チェックリスト</span>
+      <ul class="checklist">
+        <li><input type="checkbox"> OS標準音声入力をまず試す</li>
+        <li><input type="checkbox"> Aqua Voiceをインストールして試す</li>
+        <li><input type="checkbox"> 普段のプロンプトを声で入力してみる</li>
+        <li><input type="checkbox"> 「機械に話しかける」感覚に慣れる練習を1日10分</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-memo">アウトプットメモ欄</span>
+      <textarea class="memo-area" placeholder="使ってみた感想・採用したソフト："></textarea>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- ⑭ GITHUB                                    -->
+  <!-- ========================================== -->
+  <section id="github">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(108,99,255,0.15);">🐙</div>
+      <div>
+        <span class="section-number">CATEGORY 14</span>
+        <h2>GitHub 安全活用</h2>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <span class="card-label label-overview">概要</span>
+        <p>GitHubで配布されている便利ツールを、<strong>URL を Claude Code に渡すだけで導入</strong>できる。ただし安全性確認は必須。</p>
+      </div>
+      <div class="card">
+        <span class="card-label label-merit">メリット</span>
+        <ul>
+          <li>非エンジニアでも難しいインストール手順不要</li>
+          <li>コミュニティの知恵を即取り込める</li>
+          <li>「これ使えるようにして」の一言で完了</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-point">具体的な指示文（clawd-o例）</span>
+      <div class="code-block">
+        <span class="string">https://github.com/rullerzhou-afk/clawd-o</span><br>
+        <span class="keyword">これ使えるようにして。</span>
+      </div>
+      <p style="font-size:0.85rem; margin-top:8px;">→ Claude Codeが作業中はキャラが動き、終わるとピコンと音で通知。</p>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-point">⚠ 安全性チェック</span>
+      <div class="highlight-box warning">
+        <strong>GitHubは何でもダウンロードしたらダメ、危ないものもある</strong><br>
+        Claude Code（特にバイパスモード時）は危険性を止めてくれない。自衛が必要。
+      </div>
+      <ul style="margin-top:12px;">
+        <li><strong>⭐ Star数 1000超え</strong>を目安に（Googleマップで言う「口コミ500件以上で4.2」感覚）</li>
+        <li>最終更新日が最近か確認</li>
+        <li>Issue・PRに怪しい報告がないか</li>
+        <li>信頼できる人の紹介・推薦があるか</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-check">やってみよう！チェックリスト</span>
+      <ul class="checklist">
+        <li><input type="checkbox"> GitHubでStar数を確認する習慣をつける</li>
+        <li><input type="checkbox"> clawd-oのリポジトリで安全性指標を確認</li>
+        <li><input type="checkbox"> Claude Codeに導入してみる</li>
+        <li><input type="checkbox"> セミナー資料リポジトリのSkillsを取り込む</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <span class="card-label label-memo">アウトプットメモ欄</span>
+      <textarea class="memo-area" placeholder="気になったGitHubツール（URL/Star数/用途）："></textarea>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ========================================== -->
+  <!-- LECTURER POINTS                             -->
+  <!-- ========================================== -->
+  <section id="lecturer">
+    <div class="lecturer-section">
+      <h2>🎤 【講師側ポイント】伝え方・見せ方の技術</h2>
+      <p class="desc">
+        このセミナーで使われていた「刺さる伝え方」のテクニック集。<br>
+        自分が講師としてセミナーをやる時に<strong>そのまま真似できる構造</strong>に分解した。
+      </p>
+
+      <!-- 技① -->
+      <div class="technique-card">
+        <h3>🚀 技①｜インパクトファースト（すごいことを先に見せる）</h3>
+        <div class="scene-box">
+          <div class="scene-label">📺 セミナーでやっていた具体例</div>
+          <p>講師は途中で <strong>「Notionクローン」「Slackクローン」</strong> を実際に作って見せ、「もうNotionじゃないですか」「もうSlackですね」と言いながら動作デモを行う。</p>
+        </div>
+        <div class="scene-box">
+          <div class="scene-label">🎯 なぜ効くか</div>
+          <p>「言葉で説明される前に目で見た」ものは強く印象に残る。難しい概念より先に「すごいアウトプット」を体験させると、「自分もやってみたい」という強い動機が生まれる。</p>
+        </div>
+        <div class="scene-box">
+          <div class="scene-label">💡 自分のセミナーへの応用</div>
+          <ul>
+            <li>冒頭または各章の頭で「最終ゴール完成物」をデモする</li>
+            <li>受講者が「えっ、これ作れるの？」と驚く題材を選ぶ</li>
+            <li>難しさより「インパクト」を優先（Notion/Slackクローンが鉄板）</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 技② -->
+      <div class="technique-card">
+        <h3>👵 技②｜身近な例 → 専門用語の落差で刺す</h3>
+        <div class="scene-box">
+          <div class="scene-label">📺 セミナーでやっていた具体例</div>
+          <p><strong>「ひいおばあちゃんが病院で最後に教えてくれた言葉」</strong>として、誰もがわかる身近なイメージを出した直後に、専門用語だらけの一文を見せる。</p>
+          <div class="quote-block">
+            「タイトなリソースで<br>
+            クイックなローンチを目指すため<br>
+            バイブコーディングする<br>
+            AIスタートアップでのベストプラクティスは<br>
+            最初のプロンプトの時点での<br>
+            スペックの解像度が重要よ...」
+          </div>
+        </div>
+        <div class="scene-box">
+          <div class="scene-label">🎯 なぜ効くか</div>
+          <p>親しみやすいエピソードから難しい概念への<strong>「落差」</strong>が笑いと「なるほど」を同時に生む。記憶への定着率が圧倒的に上がる。</p>
+        </div>
+        <div class="scene-box">
+          <div class="scene-label">💡 自分のセミナーへの応用</div>
+          <ul>
+            <li>重要概念は<strong>身近な例え話 → 専門表現</strong>の順で出す</li>
+            <li>「おばあちゃんに説明するなら？」を一段挟む</li>
+            <li>落差ギャップを意図的に作って笑い+理解を両立</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 技③ -->
+      <div class="technique-card">
+        <h3>📊 技③｜核心を1枚のフレームで伝える</h3>
+        <div class="scene-box">
+          <div class="scene-label">📺 セミナーでやっていた具体例</div>
+          <p>「<strong>理想と現状のGAPを埋める = プロンプト</strong>」という核心を、シンプルな3ボックス図で提示。それ以上の説明をしない。</p>
+        </div>
+        <div class="gap-diagram" style="margin: 10px 0; transform: scale(0.85);">
+          <div class="gap-box ideal" style="min-width:110px; padding:10px;"><h4>理想</h4><p>✅</p></div>
+          <div class="gap-arrow">→</div>
+          <div class="gap-box prompt" style="min-width:130px; padding:10px;"><h4>GAP=プロンプト</h4><p>📝</p></div>
+          <div class="gap-arrow">←</div>
+          <div class="gap-box current" style="min-width:110px; padding:10px;"><h4>現状</h4><p>⚠️</p></div>
+        </div>
+        <div class="scene-box">
+          <div class="scene-label">💡 自分のセミナーへの応用</div>
+          <ul>
+            <li>最重要メッセージを<strong>1枚の図に圧縮</strong>する</li>
+            <li>「これだけ覚えて帰ってください」と言える核心を1つ用意</li>
+            <li>翌日に他者に説明できるレベルの簡潔さ</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 技④ -->
+      <div class="technique-card">
+        <h3>🛠️ 技④｜コピペできる素材を必ず配る（再現性の担保）</h3>
+        <div class="scene-box">
+          <div class="scene-label">📺 セミナーでやっていた具体例</div>
+          <p>「<strong>これをClaude Codeに入れたら一発だよ</strong>」と言いながら、実際のGitHub URLとプロンプトをZoomチャットに貼る。</p>
+          <div class="code-block">
+            <span class="string">https://github.com/takpfive/claude-code-course-materials-2026-04/tree/main</span>
+          </div>
+        </div>
+        <div class="scene-box">
+          <div class="scene-label">💡 自分のセミナーへの応用</div>
+          <ul>
+            <li>「今日から使えるプロンプト集」として配布</li>
+            <li>受講者が一人で再現できる手順を必ず用意</li>
+            <li>セミナー後の「やってみる」のハードルを最小化</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 技⑤ -->
+      <div class="technique-card">
+        <h3>🧠 技⑤｜ラーニングピラミッドで参加を強制する</h3>
+        <div class="scene-box">
+          <div class="scene-label">📺 セミナーでやっていた具体例</div>
+          <p>冒頭で<strong>ラーニングピラミッド</strong>を出し「聞くだけだと5%しか定着しない、教えると90%」と説明。<strong>Zoomチャットへの書き込み・他者への教授</strong>を要求。</p>
+        </div>
+        <div class="scene-box">
+          <div class="scene-label">💡 自分のセミナーへの応用</div>
+          <ul>
+            <li>冒頭でゴールを2つ明示（例：①使い方が分かる ②未来が分かる）</li>
+            <li>チャットへの書き込みを<strong>「自分のため」</strong>とフレーミング</li>
+            <li>「来週の月曜日、誰かに教えてみてください」と宿題化</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 技⑥ -->
+      <div class="technique-card">
+        <h3>⚡ 技⑥｜進行は早く、躓きはAIで自走させる</h3>
+        <div class="scene-box">
+          <div class="scene-label">📺 セミナーでやっていた具体例</div>
+          <p>「今日は早く進む」「全員に合わせない」「録画は夕方配信」と最初に宣言。<strong>「躓いたらAIに聞いてください、独学力です」</strong>と独学を促す。</p>
+        </div>
+        <div class="scene-box">
+          <div class="scene-label">💡 自分のセミナーへの応用</div>
+          <ul>
+            <li>進行ルールを冒頭で明示してペースの主導権を握る</li>
+            <li>録画提供を約束して「今ここで質問しなくていい」と安心させる</li>
+            <li>エラーは「100%出ます」と先に言って心理的負担を下げる</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 技⑦ -->
+      <div class="technique-card">
+        <h3>💬 技⑦｜エモい言葉で印象づける</h3>
+        <div class="scene-box">
+          <div class="scene-label">📺 セミナーでやっていた具体例</div>
+          <ul>
+            <li>「<strong>デスクトップの汚さは品性の汚さ</strong>」</li>
+            <li>「<strong>常に作り手になりましょう</strong>。寿司を握ってみると寿司職人のすごさが分かる」</li>
+            <li>「人間にしか出せないのは<strong>ストーリー</strong>」</li>
+          </ul>
+        </div>
+        <div class="scene-box">
+          <div class="scene-label">💡 自分のセミナーへの応用</div>
+          <ul>
+            <li>テクニカルな話の合間に<strong>パンチラインを1個</strong>仕込む</li>
+            <li>受講者がSNSで引用したくなるフレーズを準備</li>
+            <li>講師個人の体験（北海道の寿司の話など）に紐づけて記憶に残す</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- REFERENCES                                  -->
+  <!-- ========================================== -->
+  <section id="refs">
+    <div class="ref-section">
+      <h2>🔗 参考資料</h2>
+
+      <a class="ref-link" href="https://github.com/takpfive/claude-code-course-materials-2026-04/tree/main" target="_blank">
+        <span class="link-icon">🐙</span>
+        <span class="link-text">
+          <span class="link-title">セミナー公式資料リポジトリ（GitHub）</span>
+          <span class="link-url">https://github.com/takpfive/claude-code-course-materials-2026-04/tree/main</span>
+        </span>
+      </a>
+
+      <a class="ref-link" href="https://github.com/rullerzhou-afk/clawd-o" target="_blank">
+        <span class="link-icon">🤖</span>
+        <span class="link-text">
+          <span class="link-title">clawd-o（Claude Code 通知ツール）</span>
+          <span class="link-url">https://github.com/rullerzhou-afk/clawd-o</span>
+        </span>
+      </a>
+
+      <a class="ref-link" href="https://michikusatech-my.sharepoint.com/:p:/g/personal/usui_michikusa_tech/IQDkJfIQHqM-TZeD28vLulj5AVlrigJTtZhO4J5TFw9s2g0?rtime=cqh99Xei3kg" target="_blank">
+        <span class="link-icon">📊</span>
+        <span class="link-text">
+          <span class="link-title">セミナースライド資料（SharePoint）</span>
+          <span class="link-url">Michikusa Tech SharePoint</span>
+        </span>
+      </a>
+
+      <a class="ref-link" href="https://aimokuyokai.com/" target="_blank">
+        <span class="link-icon">🗓️</span>
+        <span class="link-text">
+          <span class="link-title">AI木曜会 公式サイト</span>
+          <span class="link-url">https://aimokuyokai.com/</span>
+        </span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Claude Code セミナーまとめ｜AI木曜会 × Michikusa株式会社</p>
+  <p style="color:rgba(136,136,170,0.5);">このHTMLは個人学習用ノートです。自身が講師としてセミナーを開催するための準備資料として活用してください。</p>
+</footer>
+
+</body>
+</html>
